@@ -1,0 +1,1653 @@
+{
+  "schemaVersion": 1,
+  "id": "demo-news-context-foundations-20260704",
+  "title": "デモ｜ニュースを読むための基礎30問",
+  "description": "時事を理解する土台になる、国内外ニュース・スポーツ・芸能・地理・制度のサンプルセット。毎日の最新ニュースはアプリのプロンプトから生成して取り込めます。",
+  "mode": "balanced",
+  "theme": "",
+  "createdAt": "2026-07-04T12:30:00.000Z",
+  "validAsOf": "2026-07-04",
+  "sourceSummary": "公的機関・国際機関・競技団体・主催団体の公式情報を中心にした、時事生成前の動作確認用サンプル。",
+  "questionBalance": {
+    "direct": 21,
+    "context": 6,
+    "roundup": 3
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "type": "standard",
+      "category": "domestic-news",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "日本の国会で、法律案や予算案の議決に加え、内閣総理大臣の指名も行う機関はどれ？",
+      "hint": "三権分立のうち、立法を担う機関。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "国会",
+          "explanation": "正解。国会は国権の最高機関であり、法律・予算の議決や首相指名などを行う。"
+        },
+        {
+          "id": "b",
+          "text": "内閣",
+          "explanation": "内閣は行政を担う機関。国会の議決を受け、法律や予算を執行する。"
+        },
+        {
+          "id": "c",
+          "text": "最高裁判所",
+          "explanation": "最高裁判所は司法を担い、法令が憲法に適合するかを判断する権限を持つ。"
+        },
+        {
+          "id": "d",
+          "text": "会計検査院",
+          "explanation": "会計検査院は国の収入・支出が適正かを検査する独立機関。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "国会が、法律・予算の議決や首相指名を担う。",
+      "background": "ニュースで「国会審議」「予算案」「首相指名」と出たら、立法府である国会の役割を押さえると話がつながる。",
+      "keywords": [
+        {
+          "term": "国会",
+          "shortDefinition": "法律や予算を議決する立法機関",
+          "searchQuery": "国会"
+        },
+        {
+          "term": "三権分立",
+          "shortDefinition": "立法・行政・司法を分ける考え方",
+          "searchQuery": "三権分立"
+        }
+      ],
+      "sources": [
+        {
+          "name": "日本政府広報オンライン",
+          "title": "政府の基本情報",
+          "url": "https://www.gov-online.go.jp/"
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "type": "standard",
+      "category": "domestic-news",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "国勢調査について、正しい説明はどれ？",
+      "hint": "人口と世帯の全体像をつかむ調査。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "日本に住む人と世帯を対象に、原則5年ごとに行われる基幹統計である",
+          "explanation": "正解。国勢調査は人口・世帯の実態を把握するため、原則5年ごとに行われる。"
+        },
+        {
+          "id": "b",
+          "text": "国会議員だけを対象に、毎年行われる調査である",
+          "explanation": "国勢調査は国会議員に限らず、日本に住む人と世帯が対象。毎年ではない。"
+        },
+        {
+          "id": "c",
+          "text": "企業の売上高だけを調べる経済統計である",
+          "explanation": "企業活動の統計とは別で、国勢調査は人と世帯の実態を対象にする。"
+        },
+        {
+          "id": "d",
+          "text": "住民票の住所だけを集計し、実際の居住状況は扱わない",
+          "explanation": "国勢調査は基準日時点で実際に住んでいる場所を把握する考え方をとる。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "国勢調査は、日本に住む人と世帯の実態を把握する原則5年ごとの調査。",
+      "background": "人口減少、地方創生、選挙区、学校や病院の配置などのニュースでは、基礎データとして国勢調査が使われる。",
+      "keywords": [
+        {
+          "term": "国勢調査",
+          "shortDefinition": "人口・世帯を把握する基幹統計",
+          "searchQuery": "国勢調査"
+        },
+        {
+          "term": "基幹統計",
+          "shortDefinition": "国の統計制度の中心となる重要統計",
+          "searchQuery": "基幹統計"
+        }
+      ],
+      "sources": [
+        {
+          "name": "総務省統計局",
+          "title": "国勢調査",
+          "url": "https://www.stat.go.jp/data/kokusei/"
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "type": "standard",
+      "category": "domestic-news",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "都道府県知事を選ぶ選挙の説明として正しいものはどれ？",
+      "hint": "地方自治体のトップの選ばれ方。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "その都道府県の住民が直接選挙で選ぶ",
+          "explanation": "正解。知事は地方公共団体の長として、住民による直接選挙で選ばれる。"
+        },
+        {
+          "id": "b",
+          "text": "国会議員が投票して選ぶ",
+          "explanation": "国会議員が選ぶのではなく、当該都道府県の有権者が選ぶ。"
+        },
+        {
+          "id": "c",
+          "text": "内閣総理大臣が任命する",
+          "explanation": "知事は国の官僚職ではなく、住民が選ぶ地方自治体の長。"
+        },
+        {
+          "id": "d",
+          "text": "都道府県議会の議長が自動的に就任する",
+          "explanation": "議会の議長と知事は別の役職で、選ばれ方も異なる。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "都道府県知事は、その地域の有権者による直接選挙で選ばれる。",
+      "background": "知事選のニュースを読むときは、「国の政策」と「地方自治体が自分で決められること」の境目を見ると理解しやすい。",
+      "keywords": [
+        {
+          "term": "地方自治",
+          "shortDefinition": "地域のことを地域の住民が決める仕組み",
+          "searchQuery": "地方自治"
+        },
+        {
+          "term": "直接選挙",
+          "shortDefinition": "有権者が候補者に直接投票する制度",
+          "searchQuery": "直接選挙"
+        }
+      ],
+      "sources": [
+        {
+          "name": "日本政府広報オンライン",
+          "title": "政府の基本情報",
+          "url": "https://www.gov-online.go.jp/"
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "type": "standard",
+      "category": "world-news",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "G7（主要7か国）に含まれない国はどれ？",
+      "hint": "日本を含む先進7か国の枠組み。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "中国",
+          "explanation": "正解。中国はG7の構成国ではない。"
+        },
+        {
+          "id": "b",
+          "text": "カナダ",
+          "explanation": "カナダはG7の構成国。"
+        },
+        {
+          "id": "c",
+          "text": "イタリア",
+          "explanation": "イタリアはG7の構成国。"
+        },
+        {
+          "id": "d",
+          "text": "日本",
+          "explanation": "日本はG7の構成国。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "中国はG7の構成国ではない。",
+      "background": "G7は日本、米国、英国、フランス、ドイツ、イタリア、カナダで構成される。国際会議のニュースでは、参加国と参加していない大国の両方を見ると論点が見えやすい。",
+      "keywords": [
+        {
+          "term": "G7",
+          "shortDefinition": "主要7か国による国際会議の枠組み",
+          "searchQuery": "G7"
+        },
+        {
+          "term": "首脳会議",
+          "shortDefinition": "各国の首脳が集まる会議",
+          "searchQuery": "首脳会議"
+        }
+      ],
+      "sources": [
+        {
+          "name": "外務省",
+          "title": "各国・地域情勢",
+          "url": "https://www.mofa.go.jp/mofaj/area/"
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "type": "standard",
+      "category": "world-news",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "国連安全保障理事会の常任理事国ではない国はどれ？",
+      "hint": "常任理事国は5か国。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ドイツ",
+          "explanation": "正解。ドイツは常任理事国ではない。"
+        },
+        {
+          "id": "b",
+          "text": "フランス",
+          "explanation": "フランスは常任理事国。"
+        },
+        {
+          "id": "c",
+          "text": "中国",
+          "explanation": "中国は常任理事国。"
+        },
+        {
+          "id": "d",
+          "text": "ロシア",
+          "explanation": "ロシアは常任理事国。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "国連安保理の常任理事国は米国・英国・フランス・ロシア・中国の5か国。",
+      "background": "国際紛争のニュースで安保理が動きにくい理由を考える際、常任理事国の拒否権が重要になる。",
+      "keywords": [
+        {
+          "term": "国連安全保障理事会",
+          "shortDefinition": "国際平和と安全の維持を担う国連機関",
+          "searchQuery": "国連安全保障理事会"
+        },
+        {
+          "term": "拒否権",
+          "shortDefinition": "常任理事国が決議を阻止できる権限",
+          "searchQuery": "拒否権"
+        }
+      ],
+      "sources": [
+        {
+          "name": "国際連合",
+          "title": "United Nations",
+          "url": "https://www.un.org/"
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "type": "standard",
+      "category": "world-news",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "ASEAN（東南アジア諸国連合）の事務局が置かれている都市はどれ？",
+      "hint": "東南アジアの地域連合の事務局。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ジャカルタ",
+          "explanation": "正解。ASEAN事務局はインドネシアのジャカルタに置かれている。"
+        },
+        {
+          "id": "b",
+          "text": "バンコク",
+          "explanation": "バンコクはタイの首都だが、ASEAN事務局の所在地ではない。"
+        },
+        {
+          "id": "c",
+          "text": "マニラ",
+          "explanation": "マニラはフィリピンの首都。"
+        },
+        {
+          "id": "d",
+          "text": "ハノイ",
+          "explanation": "ハノイはベトナムの首都。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "ASEAN事務局はジャカルタにある。",
+      "background": "東南アジアの貿易・安全保障・南シナ海・半導体投資などのニュースでは、ASEANという地域枠組みが頻繁に登場する。",
+      "keywords": [
+        {
+          "term": "ASEAN",
+          "shortDefinition": "東南アジア諸国連合",
+          "searchQuery": "ASEAN"
+        },
+        {
+          "term": "ジャカルタ",
+          "shortDefinition": "インドネシアの大都市でASEAN事務局所在地",
+          "searchQuery": "ジャカルタ"
+        }
+      ],
+      "sources": [
+        {
+          "name": "ASEAN Secretariat",
+          "title": "ASEAN Secretariat",
+          "url": "https://asean.org/"
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "type": "standard",
+      "category": "world-news",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "NATOの集団防衛を定めた条項として知られるのはどれ？",
+      "hint": "同盟国の安全を共同で守る考え方。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "北大西洋条約第5条",
+          "explanation": "正解。加盟国の一国への武力攻撃を全体への攻撃とみなす考え方を定める。"
+        },
+        {
+          "id": "b",
+          "text": "国連憲章第1条",
+          "explanation": "国連の目的などを定める条文で、NATOの集団防衛条項ではない。"
+        },
+        {
+          "id": "c",
+          "text": "EU基本条約第50条",
+          "explanation": "EU離脱手続きに関する条文として知られる。"
+        },
+        {
+          "id": "d",
+          "text": "ジュネーブ条約第3条",
+          "explanation": "戦時の人道的扱いに関する国際法の枠組みで、NATO条約ではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "NATOの集団防衛の中心は北大西洋条約第5条。",
+      "background": "欧州の安全保障ニュースでは「加盟国への攻撃を同盟全体の問題として扱う」という集団防衛の考え方を押さえると、各国の反応を読みやすい。",
+      "keywords": [
+        {
+          "term": "NATO",
+          "shortDefinition": "北大西洋条約機構",
+          "searchQuery": "NATO"
+        },
+        {
+          "term": "集団防衛",
+          "shortDefinition": "同盟国への攻撃を共同で防ぐ考え方",
+          "searchQuery": "集団防衛"
+        }
+      ],
+      "sources": [
+        {
+          "name": "NATO",
+          "title": "What is NATO?",
+          "url": "https://www.nato.int/nato-welcome/index.html"
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "type": "standard",
+      "category": "sports",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "日本の男子プロサッカーで、最上位カテゴリーとして知られるのはどれ？",
+      "hint": "日本の男子プロサッカーの最上位。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "J1リーグ",
+          "explanation": "正解。J1リーグは日本の男子プロサッカーの最上位カテゴリー。"
+        },
+        {
+          "id": "b",
+          "text": "J3リーグ",
+          "explanation": "J3リーグはJリーグのカテゴリーの一つだが、最上位ではない。"
+        },
+        {
+          "id": "c",
+          "text": "地域リーグ",
+          "explanation": "地域リーグは全国各地の地域単位で行われるリーグ。"
+        },
+        {
+          "id": "d",
+          "text": "全国社会人サッカー選手権",
+          "explanation": "全国社会人サッカー選手権はリーグではなく大会。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "J1リーグが日本の男子プロサッカーの最上位カテゴリー。",
+      "background": "移籍、昇格・降格、クラブ経営、観客動員のニュースを読むとき、リーグの階層構造を知っていると前提が分かる。",
+      "keywords": [
+        {
+          "term": "Jリーグ",
+          "shortDefinition": "日本のプロサッカーリーグ",
+          "searchQuery": "Jリーグ"
+        },
+        {
+          "term": "昇格・降格",
+          "shortDefinition": "成績に応じて所属カテゴリーが変わる仕組み",
+          "searchQuery": "昇格・降格"
+        }
+      ],
+      "sources": [
+        {
+          "name": "Jリーグ",
+          "title": "Jリーグについて",
+          "url": "https://www.jleague.jp/"
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "type": "standard",
+      "category": "sports",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "FIFAワールドカップの男子大会は、原則として何年ごとに開催される？",
+      "hint": "開催周期を押さえる問題。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "4年ごと",
+          "explanation": "正解。男子ワールドカップは原則4年ごとに開催される。"
+        },
+        {
+          "id": "b",
+          "text": "2年ごと",
+          "explanation": "2年ごとではない。大会間隔の短縮案が議論されたことはあるが、原則は4年ごと。"
+        },
+        {
+          "id": "c",
+          "text": "3年ごと",
+          "explanation": "3年ごとではない。"
+        },
+        {
+          "id": "d",
+          "text": "5年ごと",
+          "explanation": "5年ごとではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "男子FIFAワールドカップは原則4年ごとの開催。",
+      "background": "大会周期を知ると、予選日程、代表監督の任期、開催国の準備、放映権・スポンサーの動きなどのニュースを時系列で追いやすい。",
+      "keywords": [
+        {
+          "term": "FIFAワールドカップ",
+          "shortDefinition": "各国代表による世界最大級のサッカー大会",
+          "searchQuery": "FIFAワールドカップ"
+        },
+        {
+          "term": "予選",
+          "shortDefinition": "本大会出場国を決める試合",
+          "searchQuery": "予選"
+        }
+      ],
+      "sources": [
+        {
+          "name": "FIFA",
+          "title": "FIFA World Cup",
+          "url": "https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "type": "standard",
+      "category": "sports",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "テニスの四大大会のうち、クレーコートで行われる大会はどれ？",
+      "hint": "コートの種類で大会を見る。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "全仏オープン",
+          "explanation": "正解。全仏オープンはフランス・パリで行われるクレーコートの大会。"
+        },
+        {
+          "id": "b",
+          "text": "ウィンブルドン",
+          "explanation": "ウィンブルドンは芝コートで行われる。"
+        },
+        {
+          "id": "c",
+          "text": "全豪オープン",
+          "explanation": "全豪オープンはハードコートで行われる。"
+        },
+        {
+          "id": "d",
+          "text": "全米オープン",
+          "explanation": "全米オープンはハードコートで行われる。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "全仏オープンはクレーコートで行われる。",
+      "background": "テニスではコートの種類がプレースタイルや得意不得意に影響する。大会結果のニュースを読むとき、サーフェスを知ると番狂わせの意味が分かる。",
+      "keywords": [
+        {
+          "term": "グランドスラム",
+          "shortDefinition": "テニスの四大大会",
+          "searchQuery": "グランドスラム"
+        },
+        {
+          "term": "クレーコート",
+          "shortDefinition": "土を主成分とするテニスコート",
+          "searchQuery": "クレーコート"
+        }
+      ],
+      "sources": [
+        {
+          "name": "ITF",
+          "title": "Grand Slam tournaments",
+          "url": "https://www.itftennis.com/"
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "type": "standard",
+      "category": "sports",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "オリンピックの理念として最も近いものはどれ？",
+      "hint": "競技以外の論点も多い世界大会。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "スポーツを通じて平和と相互理解に寄与する",
+          "explanation": "正解。オリンピックはスポーツを通じた平和・相互理解を重視する。"
+        },
+        {
+          "id": "b",
+          "text": "プロ選手だけが参加する世界大会である",
+          "explanation": "現在は多くのプロ選手も参加するが、理念はプロ限定ではない。"
+        },
+        {
+          "id": "c",
+          "text": "一つの競技だけで世界一を決める大会である",
+          "explanation": "オリンピックは多競技の総合大会。"
+        },
+        {
+          "id": "d",
+          "text": "開催国の国内大会である",
+          "explanation": "各国・地域から選手が参加する国際総合競技大会。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "オリンピックはスポーツを通じた平和と相互理解を重視する。",
+      "background": "開催都市の費用、選手の政治的表現、国際関係など、オリンピックのニュースは競技以外の論点も多い。理念と現実の両方を見ると理解が深まる。",
+      "keywords": [
+        {
+          "term": "オリンピズム",
+          "shortDefinition": "スポーツを通じて人間を育てる考え方",
+          "searchQuery": "オリンピズム"
+        },
+        {
+          "term": "国際総合競技大会",
+          "shortDefinition": "多くの競技を一つの大会で行う形式",
+          "searchQuery": "国際総合競技大会"
+        }
+      ],
+      "sources": [
+        {
+          "name": "Olympics.com",
+          "title": "Olympic Games",
+          "url": "https://olympics.com/"
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "type": "standard",
+      "category": "entertainment",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "アカデミー賞（オスカー）を主催する団体はどれ？",
+      "hint": "誰が賞を主催しているか。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "映画芸術科学アカデミー（AMPAS）",
+          "explanation": "正解。アカデミー賞は米国の映画芸術科学アカデミーが主催する。"
+        },
+        {
+          "id": "b",
+          "text": "国際オリンピック委員会（IOC）",
+          "explanation": "IOCはオリンピックを統括する団体。"
+        },
+        {
+          "id": "c",
+          "text": "国際サッカー連盟（FIFA）",
+          "explanation": "FIFAはサッカーの国際統括団体。"
+        },
+        {
+          "id": "d",
+          "text": "ユネスコ（UNESCO）",
+          "explanation": "ユネスコは教育・科学・文化に関する国連専門機関。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "アカデミー賞は映画芸術科学アカデミーが主催する映画賞。",
+      "background": "映画賞のニュースでは、どの団体が選考し、どの地域・業界を主な対象にしているかで、賞の意味合いが変わる。",
+      "keywords": [
+        {
+          "term": "アカデミー賞",
+          "shortDefinition": "米国映画芸術科学アカデミーによる映画賞",
+          "searchQuery": "アカデミー賞"
+        },
+        {
+          "term": "AMPAS",
+          "shortDefinition": "Academy of Motion Picture Arts and Sciences",
+          "searchQuery": "AMPAS"
+        }
+      ],
+      "sources": [
+        {
+          "name": "The Academy",
+          "title": "About the Academy Awards",
+          "url": "https://www.oscars.org/"
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "type": "standard",
+      "category": "entertainment",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "カンヌ国際映画祭が開催される国はどれ？",
+      "hint": "フランス南部の映画祭。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "フランス",
+          "explanation": "正解。カンヌ国際映画祭はフランス南部のカンヌで開催される。"
+        },
+        {
+          "id": "b",
+          "text": "イタリア",
+          "explanation": "イタリアにはヴェネツィア国際映画祭がある。"
+        },
+        {
+          "id": "c",
+          "text": "ドイツ",
+          "explanation": "ドイツにはベルリン国際映画祭がある。"
+        },
+        {
+          "id": "d",
+          "text": "英国",
+          "explanation": "英国には多様な映画祭があるが、カンヌ国際映画祭の開催国ではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "カンヌ国際映画祭はフランスで開かれる。",
+      "background": "国際映画祭は作品の公開・配給・評価に影響する場。受賞や出品のニュースは、映画の内容だけでなく世界市場への入口としても見られる。",
+      "keywords": [
+        {
+          "term": "カンヌ国際映画祭",
+          "shortDefinition": "フランスで開かれる国際映画祭",
+          "searchQuery": "カンヌ国際映画祭"
+        },
+        {
+          "term": "パルム・ドール",
+          "shortDefinition": "カンヌ国際映画祭の最高賞",
+          "searchQuery": "パルム・ドール"
+        }
+      ],
+      "sources": [
+        {
+          "name": "Festival de Cannes",
+          "title": "Festival de Cannes",
+          "url": "https://www.festival-cannes.com/"
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "type": "standard",
+      "category": "entertainment",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "グラミー賞が主に対象とする分野はどれ？",
+      "hint": "音楽の業界賞。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "音楽",
+          "explanation": "正解。グラミー賞は音楽の功績を称える賞。"
+        },
+        {
+          "id": "b",
+          "text": "建築",
+          "explanation": "建築の主要な賞にはプリツカー賞などがある。"
+        },
+        {
+          "id": "c",
+          "text": "数学",
+          "explanation": "数学ではフィールズ賞などが知られる。"
+        },
+        {
+          "id": "d",
+          "text": "宇宙開発",
+          "explanation": "宇宙開発に特化したグラミー賞はない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "グラミー賞は音楽分野の賞。",
+      "background": "大きな賞のニュースでは、作品人気だけでなく、投票・選考の仕組みや業界内での評価が話題になることがある。",
+      "keywords": [
+        {
+          "term": "グラミー賞",
+          "shortDefinition": "音楽の功績を称える賞",
+          "searchQuery": "グラミー賞"
+        },
+        {
+          "term": "レコーディング・アカデミー",
+          "shortDefinition": "グラミー賞を担う団体",
+          "searchQuery": "レコーディング・アカデミー"
+        }
+      ],
+      "sources": [
+        {
+          "name": "Recording Academy",
+          "title": "GRAMMY Awards",
+          "url": "https://www.grammy.com/"
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "type": "standard",
+      "category": "japan-basics",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "茨城県の県庁所在地はどこ？",
+      "hint": "行政の中心都市を押さえる問題。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "水戸市",
+          "explanation": "正解。茨城県の県庁所在地は水戸市。"
+        },
+        {
+          "id": "b",
+          "text": "つくば市",
+          "explanation": "つくば市は研究学園都市として知られるが、県庁所在地ではない。"
+        },
+        {
+          "id": "c",
+          "text": "日立市",
+          "explanation": "日立市は企業城下町として知られるが、県庁所在地ではない。"
+        },
+        {
+          "id": "d",
+          "text": "土浦市",
+          "explanation": "土浦市は霞ヶ浦に近い都市だが、県庁所在地ではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "茨城県の県庁所在地は水戸市。",
+      "background": "地域ニュースでは、県庁所在地と人口の多い都市が一致しない例もある。行政・交通・産業の中心がどこかを見る入口になる。",
+      "keywords": [
+        {
+          "term": "県庁所在地",
+          "shortDefinition": "都道府県庁が置かれる都市",
+          "searchQuery": "県庁所在地"
+        },
+        {
+          "term": "水戸市",
+          "shortDefinition": "茨城県の県庁所在地",
+          "searchQuery": "水戸市"
+        }
+      ],
+      "sources": [
+        {
+          "name": "日本政府広報オンライン",
+          "title": "政府の基本情報",
+          "url": "https://www.gov-online.go.jp/"
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "type": "standard",
+      "category": "japan-basics",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "日本で最も人口が多い都道府県はどれ？",
+      "hint": "人口規模は地域政策の土台。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "東京都",
+          "explanation": "正解。東京都は日本で最も人口が多い都道府県。"
+        },
+        {
+          "id": "b",
+          "text": "大阪府",
+          "explanation": "大阪府は大都市圏を持つが、東京都より人口は少ない。"
+        },
+        {
+          "id": "c",
+          "text": "神奈川県",
+          "explanation": "神奈川県は人口が多いが、東京都より人口は少ない。"
+        },
+        {
+          "id": "d",
+          "text": "愛知県",
+          "explanation": "愛知県は中京圏の中心だが、東京都より人口は少ない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "最も人口が多い都道府県は東京都。",
+      "background": "人口は税収、交通、住宅、選挙区、教育、医療などのニュースの背景になる。人口の絶対数と人口増減は別の論点として見るとよい。",
+      "keywords": [
+        {
+          "term": "人口",
+          "shortDefinition": "ある地域に住む人の数",
+          "searchQuery": "人口"
+        },
+        {
+          "term": "人口動態",
+          "shortDefinition": "人口の増減や年齢構成の変化",
+          "searchQuery": "人口動態"
+        }
+      ],
+      "sources": [
+        {
+          "name": "総務省統計局",
+          "title": "国勢調査",
+          "url": "https://www.stat.go.jp/data/kokusei/"
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "type": "standard",
+      "category": "world-basics",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "ブラジルの首都はどこ？",
+      "hint": "最大都市と首都は別の場合がある。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ブラジリア",
+          "explanation": "正解。ブラジルの首都はブラジリア。"
+        },
+        {
+          "id": "b",
+          "text": "リオデジャネイロ",
+          "explanation": "リオデジャネイロは著名な大都市だが、首都ではない。"
+        },
+        {
+          "id": "c",
+          "text": "サンパウロ",
+          "explanation": "サンパウロは最大級の都市だが、首都ではない。"
+        },
+        {
+          "id": "d",
+          "text": "サルバドル",
+          "explanation": "サルバドルは歴史的な都市だが、首都ではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "ブラジルの首都はブラジリア。",
+      "background": "ニュースに出る国では、最大都市と首都が違うことが多い。政治の中心と経済・文化の中心を分けて見る習慣が役立つ。",
+      "keywords": [
+        {
+          "term": "ブラジリア",
+          "shortDefinition": "ブラジルの首都",
+          "searchQuery": "ブラジリア"
+        },
+        {
+          "term": "首都移転",
+          "shortDefinition": "政治機能を別の都市に移すこと",
+          "searchQuery": "首都移転"
+        }
+      ],
+      "sources": [
+        {
+          "name": "外務省",
+          "title": "各国・地域情勢",
+          "url": "https://www.mofa.go.jp/mofaj/area/"
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "type": "standard",
+      "category": "world-basics",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "オーストラリアの首都はどこ？",
+      "hint": "シドニーではなくキャンベラ。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "キャンベラ",
+          "explanation": "正解。オーストラリアの首都はキャンベラ。"
+        },
+        {
+          "id": "b",
+          "text": "シドニー",
+          "explanation": "シドニーは最大都市級だが、首都ではない。"
+        },
+        {
+          "id": "c",
+          "text": "メルボルン",
+          "explanation": "メルボルンは大都市だが、首都ではない。"
+        },
+        {
+          "id": "d",
+          "text": "パース",
+          "explanation": "パースは西オーストラリア州の中心都市だが、首都ではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "オーストラリアの首都はキャンベラ。",
+      "background": "首都は政治上の中立性や都市間のバランスを意識して選ばれることもある。国際会議や外交ニュースの地名理解にも役立つ。",
+      "keywords": [
+        {
+          "term": "キャンベラ",
+          "shortDefinition": "オーストラリアの首都",
+          "searchQuery": "キャンベラ"
+        },
+        {
+          "term": "連邦首都",
+          "shortDefinition": "連邦国家の政治の中心都市",
+          "searchQuery": "連邦首都"
+        }
+      ],
+      "sources": [
+        {
+          "name": "外務省",
+          "title": "各国・地域情勢",
+          "url": "https://www.mofa.go.jp/mofaj/area/"
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "type": "standard",
+      "category": "economy-politics",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "消費者物価指数（CPI）が主に示すものはどれ？",
+      "hint": "物価を見る基本指標。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "消費者が購入するモノやサービスの価格の動き",
+          "explanation": "正解。CPIは家計が購入する財・サービスの価格変動を示す指標。"
+        },
+        {
+          "id": "b",
+          "text": "企業の株価だけの動き",
+          "explanation": "株価指数とは別の指標。"
+        },
+        {
+          "id": "c",
+          "text": "輸出額だけの動き",
+          "explanation": "輸出額は貿易統計で把握する。"
+        },
+        {
+          "id": "d",
+          "text": "人口の増減だけ",
+          "explanation": "人口動態とは別の統計。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "CPIは、消費者が買うモノやサービスの価格変動を示す。",
+      "background": "「インフレ率」「物価上昇」のニュースでは、何の価格をどう測っているかを押さえると、家計実感との違いも考えやすい。",
+      "keywords": [
+        {
+          "term": "CPI",
+          "shortDefinition": "消費者物価指数",
+          "searchQuery": "CPI"
+        },
+        {
+          "term": "インフレ",
+          "shortDefinition": "物価全体が上がる状態",
+          "searchQuery": "インフレ"
+        }
+      ],
+      "sources": [
+        {
+          "name": "IMF",
+          "title": "Inflation",
+          "url": "https://www.imf.org/"
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "type": "standard",
+      "category": "science-culture",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "世界遺産の登録を担う国際機関はどれ？",
+      "hint": "観光だけでなく保全の話でもある。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ユネスコ（UNESCO）",
+          "explanation": "正解。世界遺産の枠組みはユネスコの世界遺産条約に基づく。"
+        },
+        {
+          "id": "b",
+          "text": "WHO",
+          "explanation": "WHOは世界保健機関で、健康分野を担う。"
+        },
+        {
+          "id": "c",
+          "text": "WTO",
+          "explanation": "WTOは世界貿易機関で、貿易ルールを扱う。"
+        },
+        {
+          "id": "d",
+          "text": "FIFA",
+          "explanation": "FIFAはサッカーの国際統括団体。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "世界遺産はユネスコの枠組みで扱われる。",
+      "background": "世界遺産の登録は観光だけでなく、保存、地域経済、住民生活、開発との両立などのニュースにつながる。",
+      "keywords": [
+        {
+          "term": "世界遺産",
+          "shortDefinition": "人類共通の価値を持つ文化・自然遺産",
+          "searchQuery": "世界遺産"
+        },
+        {
+          "term": "ユネスコ",
+          "shortDefinition": "教育・科学・文化に関する国連専門機関",
+          "searchQuery": "ユネスコ"
+        }
+      ],
+      "sources": [
+        {
+          "name": "UNESCO",
+          "title": "World Heritage",
+          "url": "https://whc.unesco.org/"
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "type": "standard",
+      "category": "science-culture",
+      "learningFocus": "direct",
+      "difficulty": 1,
+      "prompt": "地球温暖化を進める要因として、最も代表的な温室効果ガスはどれ？",
+      "hint": "気候ニュースの土台。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "二酸化炭素",
+          "explanation": "正解。二酸化炭素は人間活動による温室効果ガス排出の主要な要素の一つ。"
+        },
+        {
+          "id": "b",
+          "text": "酸素",
+          "explanation": "酸素は生命活動に不可欠な気体だが、代表的な温室効果ガスではない。"
+        },
+        {
+          "id": "c",
+          "text": "窒素",
+          "explanation": "大気の大部分を占めるが、通常は代表的な温室効果ガスとして扱われない。"
+        },
+        {
+          "id": "d",
+          "text": "ヘリウム",
+          "explanation": "ヘリウムは温室効果ガスとして主要因ではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "二酸化炭素は、地球温暖化に関わる代表的な温室効果ガス。",
+      "background": "気候変動ニュースでは、排出量、再生可能エネルギー、炭素税、異常気象、国際交渉などがつながって出てくる。",
+      "keywords": [
+        {
+          "term": "温室効果ガス",
+          "shortDefinition": "大気中で熱を保持する働きを持つ気体",
+          "searchQuery": "温室効果ガス"
+        },
+        {
+          "term": "脱炭素",
+          "shortDefinition": "温室効果ガス排出を減らす取り組み",
+          "searchQuery": "脱炭素"
+        }
+      ],
+      "sources": [
+        {
+          "name": "環境省",
+          "title": "地球温暖化対策",
+          "url": "https://www.env.go.jp/"
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "type": "standard",
+      "category": "economy-politics",
+      "learningFocus": "context",
+      "difficulty": 2,
+      "prompt": "「インフレ率が低下した」と聞いたとき、最も適切な理解はどれ？",
+      "hint": "水準と変化率を区別する。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "物価が上がる速さが鈍ったことを意味し、必ずしも物価そのものが下がったわけではない",
+          "explanation": "正解。インフレ率の低下は、価格上昇のペースが遅くなったことを指す場合がある。"
+        },
+        {
+          "id": "b",
+          "text": "すべてのモノとサービスの価格が必ず下がったことを意味する",
+          "explanation": "物価の水準自体が下がることはデフレに近い概念で、インフレ率低下とは同じではない。"
+        },
+        {
+          "id": "c",
+          "text": "株価が必ず上がることを意味する",
+          "explanation": "物価指標と株価の動きは関係しうるが、必ず同じ方向には動かない。"
+        },
+        {
+          "id": "d",
+          "text": "失業率がゼロになったことを意味する",
+          "explanation": "インフレ率と失業率は別の指標。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "インフレ率低下は、物価上昇の勢いが弱まったことを指し、価格が下がったとは限らない。",
+      "background": "経済ニュースでは「水準」と「変化率」を分けて読むのが基本。前年より高いままでも、上がるスピードが鈍ることはある。",
+      "keywords": [
+        {
+          "term": "インフレ率",
+          "shortDefinition": "物価が上がる割合",
+          "searchQuery": "インフレ率"
+        },
+        {
+          "term": "デフレ",
+          "shortDefinition": "物価全体が下がる状態",
+          "searchQuery": "デフレ"
+        }
+      ],
+      "sources": [
+        {
+          "name": "IMF",
+          "title": "Inflation",
+          "url": "https://www.imf.org/"
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "type": "standard",
+      "category": "economy-politics",
+      "learningFocus": "context",
+      "difficulty": 2,
+      "prompt": "中央銀行が政策金利を引き上げる狙いとして、一般に最も近いものはどれ？",
+      "hint": "金利は家計と企業に波及する。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "過度な需要や物価上昇を抑える方向に働かせる",
+          "explanation": "正解。金利を上げると借入コストが上がり、需要を抑える方向に働くことがある。"
+        },
+        {
+          "id": "b",
+          "text": "法律を直接改正する",
+          "explanation": "法律の改正は国会などの役割で、政策金利の操作とは別。"
+        },
+        {
+          "id": "c",
+          "text": "国勢調査を実施する",
+          "explanation": "国勢調査は統計行政の役割。"
+        },
+        {
+          "id": "d",
+          "text": "スポーツ大会の開催地を決める",
+          "explanation": "スポーツ大会の開催地決定は中央銀行の役割ではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "政策金利の引き上げは、一般に需要や物価上昇を抑える方向に作用する。",
+      "background": "金利ニュースでは、住宅ローン、企業投資、為替、預金金利など家計・企業への波及をセットで考えると理解が深まる。",
+      "keywords": [
+        {
+          "term": "政策金利",
+          "shortDefinition": "中央銀行が金融政策で重視する金利",
+          "searchQuery": "政策金利"
+        },
+        {
+          "term": "金融政策",
+          "shortDefinition": "金利や資金供給を通じて経済に働きかける政策",
+          "searchQuery": "金融政策"
+        }
+      ],
+      "sources": [
+        {
+          "name": "日本銀行",
+          "title": "金融政策",
+          "url": "https://www.boj.or.jp/mopo/"
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "type": "standard",
+      "category": "japan-basics",
+      "learningFocus": "context",
+      "difficulty": 2,
+      "prompt": "人口が減少している地域で、自治体が学校・病院・公共交通の再編を議論する主な理由として最も近いものはどれ？",
+      "hint": "地域政策の背景を読む問題。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "利用者や担い手が減り、同じ形で維持するコストが重くなるため",
+          "explanation": "正解。人口減少は利用者数・税収・人材確保に影響し、公共サービスの維持方法が課題になる。"
+        },
+        {
+          "id": "b",
+          "text": "人口が減るほど施設を無制限に増やす必要があるため",
+          "explanation": "人口減少下では、むしろ施設の維持・配置をどう最適化するかが議論になることが多い。"
+        },
+        {
+          "id": "c",
+          "text": "都道府県の名前が変わるため",
+          "explanation": "人口減少と都道府県名の変更は直接関係しない。"
+        },
+        {
+          "id": "d",
+          "text": "国会の議席数が毎年自動的に倍になるため",
+          "explanation": "選挙区や議席配分の議論はあるが、毎年自動的に倍になる仕組みではない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "人口減少は、公共サービスを同じ形で維持する難しさにつながる。",
+      "background": "地方創生や地域交通のニュースは、人口だけでなく面積、高齢化、税収、働く人の数を合わせて見ると具体的になる。",
+      "keywords": [
+        {
+          "term": "人口減少",
+          "shortDefinition": "地域に住む人の数が減ること",
+          "searchQuery": "人口減少"
+        },
+        {
+          "term": "公共サービス",
+          "shortDefinition": "行政などが提供する交通・教育・医療などのサービス",
+          "searchQuery": "公共サービス"
+        }
+      ],
+      "sources": [
+        {
+          "name": "総務省統計局",
+          "title": "国勢調査",
+          "url": "https://www.stat.go.jp/data/kokusei/"
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "type": "standard",
+      "category": "world-basics",
+      "learningFocus": "context",
+      "difficulty": 2,
+      "prompt": "海上輸送の要所である「海峡」が国際ニュースで注目されやすい理由として最も近いものはどれ？",
+      "hint": "地理が経済に直結する。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "船舶の通行が集中し、物流やエネルギー供給に影響しやすいため",
+          "explanation": "正解。狭い海域に通航が集中するため、事故・紛争・封鎖の影響が広がりやすい。"
+        },
+        {
+          "id": "b",
+          "text": "海峡では航空機しか通れないため",
+          "explanation": "海峡は海の通路であり、主に船舶航行の観点で重要。"
+        },
+        {
+          "id": "c",
+          "text": "海峡はすべて一つの国の首都にあるため",
+          "explanation": "海峡は国境や国際水域にまたがることもあり、首都との関係は一様ではない。"
+        },
+        {
+          "id": "d",
+          "text": "海峡では貿易が法律上禁止されているため",
+          "explanation": "むしろ国際物流上の重要な通路となる場合が多い。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "海峡は物流が集中するため、国際経済と安全保障の両面で注目される。",
+      "background": "原油、LNG、部品、食料などは海上輸送に依存する。遠い地域の緊張が日本の物価や供給に影響する理由の一つになる。",
+      "keywords": [
+        {
+          "term": "シーレーン",
+          "shortDefinition": "海上交通路",
+          "searchQuery": "シーレーン"
+        },
+        {
+          "term": "チョークポイント",
+          "shortDefinition": "物流が集中し、遮断されると影響が大きい地点",
+          "searchQuery": "チョークポイント"
+        }
+      ],
+      "sources": [
+        {
+          "name": "外務省",
+          "title": "各国・地域情勢",
+          "url": "https://www.mofa.go.jp/mofaj/area/"
+        }
+      ]
+    },
+    {
+      "id": "q26",
+      "type": "standard",
+      "category": "sports",
+      "learningFocus": "context",
+      "difficulty": 2,
+      "prompt": "スポーツの移籍ニュースで「移籍金」が発生する場合、一般に誰から誰へ支払われるものとして理解するのが近い？",
+      "hint": "スポーツビジネスの基本。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "新しい所属先クラブから、元の所属先クラブへ",
+          "explanation": "正解。契約期間中の選手を移籍させる際、新クラブが旧クラブへ支払う形が一般的。"
+        },
+        {
+          "id": "b",
+          "text": "選手から観客へ",
+          "explanation": "移籍金は観客へ支払うものではない。"
+        },
+        {
+          "id": "c",
+          "text": "審判からリーグへ",
+          "explanation": "審判が支払うものではない。"
+        },
+        {
+          "id": "d",
+          "text": "放送局からすべての選手へ均等に",
+          "explanation": "放映権料と移籍金は別の仕組み。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "移籍金は、一般に新クラブから旧クラブへ支払われる。",
+      "background": "スポーツビジネスでは、移籍金、年俸、肖像権、放映権、スポンサー収入が別々に動く。ニュースの金額が何を指すかを見るのが大事。",
+      "keywords": [
+        {
+          "term": "移籍金",
+          "shortDefinition": "選手移籍に伴いクラブ間で支払われる対価",
+          "searchQuery": "移籍金"
+        },
+        {
+          "term": "契約期間",
+          "shortDefinition": "契約が有効な期間",
+          "searchQuery": "契約期間"
+        }
+      ],
+      "sources": [
+        {
+          "name": "FIFA",
+          "title": "FIFA World Cup",
+          "url": "https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup"
+        }
+      ]
+    },
+    {
+      "id": "q27",
+      "type": "standard",
+      "category": "entertainment",
+      "learningFocus": "context",
+      "difficulty": 2,
+      "prompt": "映画祭での受賞が作品に与えうる影響として、最も近いものはどれ？",
+      "hint": "受賞は流通にも影響する。",
+      "choices": [
+        {
+          "id": "a",
+          "text": "海外配給や劇場公開、作品への注目を後押しする場合がある",
+          "explanation": "正解。受賞は評価の可視化になり、配給・宣伝・観客の関心につながることがある。"
+        },
+        {
+          "id": "b",
+          "text": "必ず制作費がゼロになる",
+          "explanation": "受賞しても制作費がゼロになることはない。"
+        },
+        {
+          "id": "c",
+          "text": "作品の著作権が自動的に消える",
+          "explanation": "受賞と著作権の消滅は無関係。"
+        },
+        {
+          "id": "d",
+          "text": "その年以降、他の映画を公開できなくなる",
+          "explanation": "受賞が他作品の公開を禁止する仕組みはない。"
+        }
+      ],
+      "correctChoiceId": "a",
+      "shortExplanation": "映画祭の受賞は、作品の流通や注目を後押しすることがある。",
+      "background": "芸能・カルチャーのニュースは、受賞結果だけでなく、映画祭が作品と市場をつなぐ場である点を見ると面白くなる。",
+      "keywords": [
+        {
+          "term": "映画祭",
+          "shortDefinition": "映画の上映・評価・市場取引が行われる場",
+          "searchQuery": "映画祭"
+        },
+        {
+          "term": "配給",
+          "shortDefinition": "作品を劇場・配信などへ届ける仕組み",
+          "searchQuery": "配給"
+        }
+      ],
+      "sources": [
+        {
+          "name": "Festival de Cannes",
+          "title": "Festival de Cannes",
+          "url": "https://www.festival-cannes.com/"
+        }
+      ]
+    },
+    {
+      "id": "q28",
+      "type": "false_news",
+      "category": "world-news",
+      "learningFocus": "roundup",
+      "difficulty": 2,
+      "prompt": "次のうち、事実と異なるものはどれ？",
+      "hint": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "国連安全保障理事会の常任理事国にはフランスが含まれる。",
+          "explanation": "事実。フランスは常任理事国の一つ。"
+        },
+        {
+          "id": "b",
+          "text": "ASEAN事務局はジャカルタに置かれている。",
+          "explanation": "事実。ASEAN事務局はインドネシアのジャカルタにある。"
+        },
+        {
+          "id": "c",
+          "text": "NATOの集団防衛は北大西洋条約第5条で知られる。",
+          "explanation": "事実。第5条は加盟国への攻撃を共同の問題とみなす考え方を定める。"
+        },
+        {
+          "id": "d",
+          "text": "G7の構成国には中国が含まれる。",
+          "explanation": "誤り。中国はG7の構成国ではない。"
+        }
+      ],
+      "correctChoiceId": "d",
+      "shortExplanation": "中国はG7の構成国ではない。ほかの3つは国際機関・枠組みに関する正しい説明。",
+      "background": "似た略称や国際会議は混同しやすい。国際ニュースでは「誰が参加し、どんな権限を持つ枠組みか」をセットで整理すると強い。",
+      "keywords": [
+        {
+          "term": "G7",
+          "shortDefinition": "主要7か国の枠組み",
+          "searchQuery": "G7"
+        },
+        {
+          "term": "ASEAN",
+          "shortDefinition": "東南アジア諸国連合",
+          "searchQuery": "ASEAN"
+        },
+        {
+          "term": "NATO",
+          "shortDefinition": "北大西洋条約機構",
+          "searchQuery": "NATO"
+        }
+      ],
+      "sources": [
+        {
+          "name": "国際連合",
+          "title": "United Nations",
+          "url": "https://www.un.org/"
+        },
+        {
+          "name": "ASEAN Secretariat",
+          "title": "ASEAN Secretariat",
+          "url": "https://asean.org/"
+        },
+        {
+          "name": "NATO",
+          "title": "What is NATO?",
+          "url": "https://www.nato.int/nato-welcome/index.html"
+        },
+        {
+          "name": "外務省",
+          "title": "各国・地域情勢",
+          "url": "https://www.mofa.go.jp/mofaj/area/"
+        }
+      ]
+    },
+    {
+      "id": "q29",
+      "type": "false_news",
+      "category": "sports",
+      "learningFocus": "roundup",
+      "difficulty": 2,
+      "prompt": "次のうち、事実と異なるものはどれ？",
+      "hint": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "男子FIFAワールドカップは原則4年ごとに開催される。",
+          "explanation": "事実。男子ワールドカップは原則4年周期。"
+        },
+        {
+          "id": "b",
+          "text": "全仏オープンはクレーコートで行われる。",
+          "explanation": "事実。全仏オープンはクレーコートの四大大会。"
+        },
+        {
+          "id": "c",
+          "text": "J1リーグは日本の男子プロサッカーの最上位カテゴリーとして知られる。",
+          "explanation": "事実。J1リーグが最上位カテゴリー。"
+        },
+        {
+          "id": "d",
+          "text": "ウィンブルドンはハードコートで行われる。",
+          "explanation": "誤り。ウィンブルドンは芝コートで行われる。"
+        }
+      ],
+      "correctChoiceId": "d",
+      "shortExplanation": "ウィンブルドンは芝コートで行われる。ほかの3つはスポーツに関する正しい説明。",
+      "background": "スポーツのニュースは、競技ルールや大会の条件を知ると「なぜこの選手が有利・不利なのか」まで読める。",
+      "keywords": [
+        {
+          "term": "ウィンブルドン",
+          "shortDefinition": "芝コートで行われるテニス四大大会",
+          "searchQuery": "ウィンブルドン"
+        },
+        {
+          "term": "サーフェス",
+          "shortDefinition": "競技を行うコートの表面",
+          "searchQuery": "サーフェス"
+        }
+      ],
+      "sources": [
+        {
+          "name": "FIFA",
+          "title": "FIFA World Cup",
+          "url": "https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup"
+        },
+        {
+          "name": "ITF",
+          "title": "Grand Slam tournaments",
+          "url": "https://www.itftennis.com/"
+        },
+        {
+          "name": "Jリーグ",
+          "title": "Jリーグについて",
+          "url": "https://www.jleague.jp/"
+        }
+      ]
+    },
+    {
+      "id": "q30",
+      "type": "false_news",
+      "category": "entertainment",
+      "learningFocus": "roundup",
+      "difficulty": 2,
+      "prompt": "次のうち、事実と異なるものはどれ？",
+      "hint": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "アカデミー賞は映画分野の賞である。",
+          "explanation": "事実。アカデミー賞は映画作品や映画関係者を対象とする賞。"
+        },
+        {
+          "id": "b",
+          "text": "カンヌ国際映画祭はフランスで開催される。",
+          "explanation": "事実。フランス南部のカンヌで開かれる。"
+        },
+        {
+          "id": "c",
+          "text": "グラミー賞は主に音楽分野の賞である。",
+          "explanation": "事実。音楽の功績を称える賞。"
+        },
+        {
+          "id": "d",
+          "text": "世界遺産の登録はFIFAが担っている。",
+          "explanation": "誤り。世界遺産はユネスコの枠組みで扱われる。"
+        }
+      ],
+      "correctChoiceId": "d",
+      "shortExplanation": "世界遺産の登録を担うのはユネスコであり、FIFAではない。",
+      "background": "カルチャーのニュースでは、賞・映画祭・国際機関の違いを整理すると、話題の位置づけが分かりやすくなる。",
+      "keywords": [
+        {
+          "term": "ユネスコ",
+          "shortDefinition": "教育・科学・文化に関する国連専門機関",
+          "searchQuery": "ユネスコ"
+        },
+        {
+          "term": "FIFA",
+          "shortDefinition": "サッカーの国際統括団体",
+          "searchQuery": "FIFA"
+        }
+      ],
+      "sources": [
+        {
+          "name": "The Academy",
+          "title": "About the Academy Awards",
+          "url": "https://www.oscars.org/"
+        },
+        {
+          "name": "Festival de Cannes",
+          "title": "Festival de Cannes",
+          "url": "https://www.festival-cannes.com/"
+        },
+        {
+          "name": "Recording Academy",
+          "title": "GRAMMY Awards",
+          "url": "https://www.grammy.com/"
+        },
+        {
+          "name": "UNESCO",
+          "title": "World Heritage",
+          "url": "https://whc.unesco.org/"
+        }
+      ]
+    }
+  ]
+}
