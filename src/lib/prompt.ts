@@ -1,6 +1,6 @@
 import type { CategoryId, PromptSettings } from '../types';
 import { CATEGORY_META } from '../types';
-import { clamp } from './utils';
+import { clamp, getTokyoDateTime } from './utils';
 
 const categoryInstruction: Record<CategoryId, string> = {
   'domestic-news': '国内ニュース（政治・社会・経済・地域など）',
@@ -70,6 +70,52 @@ function minimumCounts(total: number) {
   return { headline: 1, foundation: 1 };
 }
 
+export interface NewsFreshnessQuota {
+  within24Hours: number;
+  within3Days: number;
+  within7Days: number;
+}
+
+function newsFreshnessQuota(total: number): NewsFreshnessQuota {
+  // 全問を速報化せず、短期ニュースを確実に混ぜる。
+  // 30問では 24時間以内6問、24〜72時間3問、4〜7日前2問を必須にする。
+  if (total >= 45) return { within24Hours: 10, within3Days: 5, within7Days: 3 };
+  if (total >= 30) return { within24Hours: 6, within3Days: 3, within7Days: 2 };
+  if (total >= 20) return { within24Hours: 4, within3Days: 2, within7Days: 1 };
+  return { within24Hours: 2, within3Days: 1, within7Days: 1 };
+}
+
+export function getNewsFreshnessPreview(settings: PromptSettings): string[] {
+  const quota = newsFreshnessQuota(settings.questionCount);
+  return [
+    `24時間以内 ${quota.within24Hours}問以上（最優先）`,
+    `24〜72時間 ${quota.within3Days}問以上`,
+    `4〜7日 ${quota.within7Days}問以上`,
+  ];
+}
+
+function newsFreshnessInstruction(settings: PromptSettings, isTheme: boolean) {
+  const quota = newsFreshnessQuota(settings.questionCount);
+  const themeRule = isTheme
+    ? 'テーマに結びつく直近ニュースを最優先に選んでください。テーマと直接結びつく確かな短期ニュースが足りないときだけ、残りの短期ニュース枠は一般の重要時事で補い、テーマ中心の構成を崩さないでください。'
+    : '国内外・スポーツ・芸能・科学などを横断して、重要度と多様性の両方を満たしてください。';
+
+  return `# ニュースの鮮度ルール（必須）
+短期ニュースの終点は、情報基準日「${settings.validAsOf}」の生成時点（日本時間）です。生成時点は ${getTokyoDateTime()} です。情報基準日が生成日より過去の場合は、その日の23:59 JSTを終点として扱ってください。
+
+全${settings.questionCount}問のうち、次の短期ニュース問題を必ず含めてください。これは全問を速報化するルールではありません。残りは、背景・地理・制度・歴史・比較など、長く役立つ知識に使ってください。
+- 直近24時間以内に起きた／公表されたニュース：${quota.within24Hours}問以上。最優先で選ぶ。
+- 24時間超〜72時間以内（3日以内）のニュース：${quota.within3Days}問以上。
+- 72時間超〜7日以内（4〜7日前）のニュース：${quota.within7Days}問以上。
+
+- 上記は「問題数」で数える。短期ニュース枠は原則 direct または roundup に置き、同じ出来事を言い換えて複数問に水増ししない。
+- roundup を短期ニュース枠に数えるのは、3つの事実側が同じ鮮度帯に収まり、各選択肢に根拠を示せる場合だけにする。
+- 記事の更新日時だけが新しく、出来事そのものが7日より前なら短期ニュース枠に数えない。古い話題の再掲・まとめ・解説記事も同様。
+- 各短期ニュース問題は、sources に実在する一次情報または信頼できる報道機関のURLを付け、publishedAt には実際の公開日を記載する。
+- 確認できない速報、未確定の観測、出典不明のSNS投稿で枠を埋めない。確かな別ニュースに差し替える。
+- ${themeRule}`;
+}
+
 export function getBalancedMixPreview(settings: PromptSettings): string[] {
   const selected = settings.categories.length > 0 ? settings.categories : Object.keys(categoryInstruction) as CategoryId[];
   const selectedSet = new Set(selected);
@@ -115,6 +161,7 @@ export function buildPrompt(settings: PromptSettings): string {
   const categoryRules = selectedCategories.map((id) => `- ${categoryInstruction[id]}`).join('\n');
   const themeText = settings.theme.trim();
   const isTheme = settings.mode === 'theme' && themeText.length > 0;
+  const freshnessText = newsFreshnessInstruction(settings, isTheme);
   const balanceText = isTheme
     ? `テーマは「${themeText}」。全${settings.questionCount}問のうち、${direct}問はテーマの中心を直接問う問題にしてください。${context}問だけ、テーマを理解するための背景・周辺・比較・前提知識に広げてください。派生問題が主役にならないようにしてください。`
     : `テーマ指定なしの標準セットです。全${settings.questionCount}問を、直近ニュースとニュースを理解するための基礎知識でバランスよく構成してください。\n${defaultMix(settings, selectedCategories)}`;
@@ -130,6 +177,8 @@ ${settings.validAsOf}
 
 # 出題方針
 ${balanceText}
+
+${freshnessText}
 
 問題構成は次の合計に必ずしてください。
 - direct：${direct}問（聞かれているテーマ・ニュースの直接的な理解を問う）
