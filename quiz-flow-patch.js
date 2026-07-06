@@ -42,13 +42,13 @@ function renameImportButton() {
   });
 }
 
-function showImportToast(title, count) {
+function showImportToast(title) {
   document.querySelector('.app-import-success-toast')?.remove();
   window.clearTimeout(toastTimer);
   const toast = document.createElement('div');
   toast.className = 'app-import-success-toast';
   toast.setAttribute('role', 'status');
-  toast.innerHTML = `<span>✓</span><div><strong>取り込み完了。クイズを開始しました</strong><small>「${title || '問題セット'}」${count ? `｜${count}問` : ''}</small></div>`;
+  toast.innerHTML = `<span>✓</span><div><strong>取り込み完了。クイズを開始しました</strong><small>「${title || '問題セット'}」</small></div>`;
   document.body.appendChild(toast);
   toastTimer = window.setTimeout(() => toast.remove(), 4200);
 }
@@ -61,7 +61,7 @@ function detectSuccessfulImport() {
   if (!message) return;
 
   const match = message.match(/「(.+?)」/);
-  pendingImport = { title: match ? match[1] : '', detectedAt: Date.now() };
+  pendingImport = { title: match ? match[1] : '' };
   startTriggered = false;
 
   const homeButton = [...document.querySelectorAll('.bottom-nav button')]
@@ -82,10 +82,7 @@ function startImportedQuiz() {
   if (!startButton) return;
 
   startTriggered = true;
-  const countText = matchingCard.querySelector('.set-balance')?.textContent || '';
-  const countMatch = countText.match(/ニュース\s*(\d+)/);
-  const count = countMatch ? Number(countMatch[1]) : null;
-  showImportToast(pendingImport.title, count);
+  showImportToast(pendingImport.title);
   startButton.click();
   pendingImport = null;
 }
