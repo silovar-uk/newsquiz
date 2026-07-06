@@ -1,6 +1,7 @@
-import { useMemo, type CSSProperties } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import type { QuizAttempt, QuizSet } from '../types';
 import { CATEGORY_META } from '../types';
+import { deleteQuizSet } from '../lib/db';
 import { average, formatDurationLong } from '../lib/utils';
 
 interface ResultProps {
@@ -11,6 +12,8 @@ interface ResultProps {
 }
 
 export function Result({ attempt, quizSet, onHome, onRetryReview }: ResultProps) {
+  const [isDeletingSet, setIsDeletingSet] = useState(false);
+  const [deleteError, setDeleteError] = useState('');
   const correct = attempt.answers.filter((answer) => answer.isCorrect).length;
   const total = quizSet.questions.length;
   const percentage = Math.round((correct / Math.max(1, total)) * 100);
@@ -41,6 +44,22 @@ export function Result({ attempt, quizSet, onHome, onRetryReview }: ResultProps)
     return [...values.entries()].sort((a, b) => b[1].count - a[1].count).slice(0, 6);
   }, [quizSet.questions, reviewAnswers]);
 
+  const removeCompletedSet = async () => {
+    const accepted = window.confirm(`「${quizSet.title}」を削除しますか？\n解答履歴と復習記録は残ります。`);
+    if (!accepted) return;
+
+    setDeleteError('');
+    setIsDeletingSet(true);
+    try {
+      await deleteQuizSet(quizSet.id);
+      // Appのメモリ上の一覧も確実に更新するため、ホームを新しい状態で開き直す。
+      window.location.reload();
+    } catch (error) {
+      setDeleteError(error instanceof Error ? error.message : 'セットを削除できませんでした。');
+      setIsDeletingSet(false);
+    }
+  };
+
   return (
     <main className="page-shell result-shell">
       <section className="score-hero">
@@ -65,6 +84,14 @@ export function Result({ attempt, quizSet, onHome, onRetryReview }: ResultProps)
       </section>
 
       {keywordCounts.length > 0 && <section className="section-block"><div className="section-heading"><div><p className="section-kicker">WORDS TO KEEP</p><h2>今日、持ち帰る重要ワード</h2></div></div><div className="keyword-list">{keywordCounts.map(([term, data]) => <a className="keyword-card" key={term} href={`https://www.google.com/search?q=${encodeURIComponent(data.query)}`} target="_blank" rel="noreferrer"><strong>{term}</strong><span>{data.definition}</span><small>Googleで調べる ↗</small></a>)}</div></section>}
+
+      <section className="result-cleanup-card">
+        <p className="section-kicker">SET CLEANUP</p>
+        <h2>このセットは、もう片づけても大丈夫。</h2>
+        <p>解答履歴・正答率・復習候補は残ります。もう一度このセットを解く予定がなければ、一覧を軽くするために削除できます。</p>
+        <button className="danger-button" onClick={() => void removeCompletedSet()} disabled={isDeletingSet}>{isDeletingSet ? '削除中…' : 'このセットを削除'}</button>
+        {deleteError && <small className="delete-set-error">{deleteError}</small>}
+      </section>
 
       <div className="result-actions">
         {reviewAnswers.length > 0 && <button className="primary-button" onClick={() => onRetryReview(reviewAnswers.map((answer) => answer.questionId))}>要復習 {reviewAnswers.length}問を解き直す</button>}
