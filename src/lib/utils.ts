@@ -56,3 +56,13 @@ export const getTokyoDate = (date = new Date()) => {
   const value = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value ?? '';
   return `${value('year')}-${value('month')}-${value('day')}`;
 };
+
+export const getTokyoDateTime = (date = new Date()) => new Intl.DateTimeFormat('ja-JP', {
+  timeZone: 'Asia/Tokyo',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+}).format(date).replace(/\//g, '-').replace(',', '') + ' JST';
