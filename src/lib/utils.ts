@@ -66,3 +66,34 @@ export const getTokyoDateTime = (date = new Date()) => new Intl.DateTimeFormat('
   minute: '2-digit',
   hour12: false,
 }).format(date).replace(/\//g, '-').replace(',', '') + ' JST';
+
+/**
+ * AI出力でありがちな「www.example.com」や「example.com/path」を、
+ * GitHub Pages配下の相対パスではなく安全な外部URLとして扱う。
+ */
+export const normalizeExternalUrl = (value: string | undefined | null): string | null => {
+  const raw = value?.trim().replace(/\s/g, '');
+  if (!raw) return null;
+
+  const candidate = /^https?:\/\//i.test(raw)
+    ? raw
+    : raw.startsWith('//')
+      ? `https:${raw}`
+      : /^(?:www\.)/i.test(raw)
+        ? `https://${raw}`
+        : /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9-]+)+(?:[/?#].*)?$/i.test(raw)
+          ? `https://${raw}`
+          : raw;
+
+  try {
+    const parsed = new URL(candidate);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed.href : null;
+  } catch {
+    return null;
+  }
+};
+
+export const sourceSearchUrl = (name: string, title?: string) => {
+  const query = [name, title].filter(Boolean).join(' ');
+  return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+};
