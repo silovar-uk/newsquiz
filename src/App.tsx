@@ -64,6 +64,7 @@ export default function App() {
   const [resultAttempt, setResultAttempt] = useState<QuizAttempt | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
+  const [quizLaunchNotice, setQuizLaunchNotice] = useState<string | null>(null);
 
   const sortedQuizSets = useMemo(() => [...quizSets].sort((a, b) => b.createdAt.localeCompare(a.createdAt)), [quizSets]);
   const sortedAttempts = useMemo(() => [...attempts].sort((a, b) => b.startedAt.localeCompare(a.startedAt)), [attempts]);
@@ -87,6 +88,12 @@ export default function App() {
       .catch((error) => setLoadError(error instanceof Error ? error.message : 'データの読み込みに失敗しました。'))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (!quizLaunchNotice) return;
+    const timer = window.setTimeout(() => setQuizLaunchNotice(null), 4200);
+    return () => window.clearTimeout(timer);
+  }, [quizLaunchNotice]);
 
   const persistAttempt = (attempt: QuizAttempt) => {
     setAttempts((previous) => [attempt, ...previous.filter((item) => item.id !== attempt.id)]);
@@ -114,6 +121,12 @@ export default function App() {
     setQuizSets((previous) => [quizSet, ...previous.filter((item) => item.id !== quizSet.id)]);
   };
 
+  const importQuizSetAndStart = async (quizSet: QuizSet) => {
+    await importQuizSet(quizSet);
+    setQuizLaunchNotice(`「${quizSet.title}」を取り込み、${quizSet.questions.length}問を開始しました。`);
+    startQuiz(quizSet);
+  };
+
   const removeQuizSet = async (quizSet: QuizSet) => {
     const accepted = window.confirm(`「${quizSet.title}」を削除しますか？\n解答履歴は残ります。`);
     if (!accepted) return;
@@ -132,7 +145,6 @@ export default function App() {
     const reviewSet = buildReviewSet(source, questionIds);
     void (async () => {
       try {
-        // 復習セットも保存しておくと、途中離脱・履歴・結果の照合が壊れません。
         await importQuizSet(reviewSet);
         startQuiz(reviewSet);
       } catch (error) {
@@ -166,10 +178,10 @@ export default function App() {
     <div className="app-root">
       {loadError && <div className="top-error">{loadError}</div>}
       {view === 'home' && <Home quizSets={sortedQuizSets} attempts={sortedAttempts} onStart={startQuiz} onQuickReview={review} onDeleteSet={(set) => void removeQuizSet(set)} onNavigate={setView} />}
-      {view === 'import' && <ImportPanel onImport={importQuizSet} />}
+      {view === 'import' && <ImportPanel onImportAndStart={importQuizSetAndStart} />}
       {view === 'prompt' && <PromptBuilder settings={settings.promptSettings} onSettingsChange={updatePromptSettings} />}
       {view === 'history' && <History attempts={sortedAttempts} quizSets={sortedQuizSets} onReview={review} onDeleteAttempt={(attempt) => { if (window.confirm('この解答履歴を削除しますか？')) { void deleteAttempt(attempt.id); setAttempts((previous) => previous.filter((item) => item.id !== attempt.id)); } }} onExport={() => void exportBackup()} onImportBackup={restoreBackup} />}
-      {view === 'quiz' && activeSet && activeAttempt && <QuizRunner quizSet={activeSet} initialAttempt={activeAttempt} onPersist={persistAttempt} onComplete={completeQuiz} onExit={() => setView('home')} />}
+      {view === 'quiz' && activeSet && activeAttempt && <QuizRunner quizSet={activeSet} initialAttempt={activeAttempt} onPersist={persistAttempt} onComplete={completeQuiz} onExit={() => setView('home')} importNotice={quizLaunchNotice} />}
       {view === 'result' && resultAttempt && activeSet && <Result attempt={resultAttempt} quizSet={activeSet} onHome={() => setView('home')} onRetryReview={(ids) => review(activeSet, ids)} />}
 
       {!['quiz', 'result'].includes(view) && (
