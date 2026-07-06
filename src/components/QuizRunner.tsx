@@ -9,17 +9,17 @@ interface QuizRunnerProps {
   onPersist: (attempt: QuizAttempt) => void;
   onComplete: (attempt: QuizAttempt) => void;
   onExit: () => void;
+  importNotice?: string | null;
 }
 
 function getAnswer(attempt: QuizAttempt, questionId: string) {
   return attempt.answers.find((answer) => answer.questionId === questionId);
 }
 
-export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onExit }: QuizRunnerProps) {
+export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onExit, importNotice }: QuizRunnerProps) {
   const [attempt, setAttempt] = useState<QuizAttempt>(initialAttempt);
   const [activeMs, setActiveMs] = useState(initialAttempt.activeMs);
   const [showHint, setShowHint] = useState(Boolean(getAnswer(initialAttempt, quizSet.questions[initialAttempt.currentQuestionIndex]?.id ?? '')?.hintUsed));
-  const [showDetails, setShowDetails] = useState(false);
   const lastTick = useRef(performance.now());
   const answerPanelRef = useRef<HTMLElement>(null);
 
@@ -54,10 +54,7 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
   }, [attempt, activeMs, onPersist]);
 
   useEffect(() => {
-    setShowDetails(false);
     setShowHint(Boolean(getAnswer(attempt, quizSet.questions[attempt.currentQuestionIndex]?.id ?? '')?.hintUsed));
-    // 現在の問題が変わったときだけ、解説の開閉を初期化する。
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [attempt.currentQuestionIndex, quizSet.id]);
 
   useEffect(() => {
@@ -143,7 +140,6 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
       questionStartedAtActiveMs: activeMs,
     };
     setShowHint(false);
-    setShowDetails(false);
     saveAttempt(nextAttempt);
   };
 
@@ -157,6 +153,13 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
         <button className="text-button" onClick={onExit} aria-label="クイズを終了してホームへ戻る">終了</button>
         <div className="quiz-timer" aria-label={`集中時間 ${formatDuration(activeMs)}`}>⏱ {formatDuration(activeMs)}</div>
       </header>
+
+      {importNotice && (
+        <div className="quiz-launch-notice" role="status">
+          <span>✓</span>
+          <div><strong>取り込み完了</strong><small>{importNotice}</small></div>
+        </div>
+      )}
 
       <div className="quiz-progress-wrap" aria-label={`進捗 ${Math.round(progress)}%`}>
         <div className="quiz-progress-track"><div className="quiz-progress-bar" style={{ width: `${progress}%` }} /></div>
@@ -248,72 +251,67 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
           )}
 
           <div className="answer-quick-actions">
-            <button className="detail-toggle-button" onClick={() => setShowDetails((current) => !current)} aria-expanded={showDetails} aria-controls={`details-${currentQuestion.id}`}>
-              {showDetails ? '詳しい解説を閉じる' : '選択肢と背景を詳しく見る'}
-            </button>
             <button className={`bookmark-button ${currentAnswer.bookmarked ? 'is-bookmarked' : ''}`} onClick={toggleBookmark}>
               {currentAnswer.bookmarked ? '★ 復習に追加済み' : '☆ 復習に追加'}
             </button>
           </div>
 
-          {showDetails && (
-            <div className="answer-details" id={`details-${currentQuestion.id}`}>
-              {!isRoundup && (
-                <div className="explanation-section">
-                  <h3>選択肢の見分け方</h3>
-                  <div className="choice-explanations">
-                    {currentQuestion.choices.map((choice, index) => (
-                      <div key={choice.id} className={`choice-explanation ${choice.id === currentQuestion.correctChoiceId ? 'is-correct' : ''}`}>
-                        <span>{String.fromCharCode(65 + index)}</span>
-                        <p>{choice.explanation}</p>
-                      </div>
-                    ))}
-                  </div>
+          <div className="answer-details always-visible" id={`details-${currentQuestion.id}`}>
+            {!isRoundup && (
+              <div className="explanation-section">
+                <h3>選択肢の見分け方</h3>
+                <div className="choice-explanations">
+                  {currentQuestion.choices.map((choice, index) => (
+                    <div key={choice.id} className={`choice-explanation ${choice.id === currentQuestion.correctChoiceId ? 'is-correct' : ''}`}>
+                      <span>{String.fromCharCode(65 + index)}</span>
+                      <p>{choice.explanation}</p>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
 
-              {currentQuestion.background && (
-                <div className="explanation-section">
-                  <h3>ニュースにつながる背景</h3>
-                  <p>{currentQuestion.background}</p>
-                </div>
-              )}
+            {currentQuestion.background && (
+              <div className="explanation-section">
+                <h3>ニュースにつながる背景</h3>
+                <p>{currentQuestion.background}</p>
+              </div>
+            )}
 
-              {currentQuestion.keywords.length > 0 && (
-                <div className="explanation-section">
-                  <h3>重要ワード</h3>
-                  <div className="keyword-list">
-                    {currentQuestion.keywords.map((keyword) => (
-                      <a
-                        className="keyword-card"
-                        key={keyword.term}
-                        href={`https://www.google.com/search?q=${encodeURIComponent(keyword.searchQuery || keyword.term)}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <strong>{keyword.term}</strong>
-                        <span>{keyword.shortDefinition}</span>
-                        <small>Googleで調べる ↗</small>
-                      </a>
-                    ))}
-                  </div>
+            {currentQuestion.keywords.length > 0 && (
+              <div className="explanation-section">
+                <h3>重要ワード</h3>
+                <div className="keyword-list">
+                  {currentQuestion.keywords.map((keyword) => (
+                    <a
+                      className="keyword-card"
+                      key={keyword.term}
+                      href={`https://www.google.com/search?q=${encodeURIComponent(keyword.searchQuery || keyword.term)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <strong>{keyword.term}</strong>
+                      <span>{keyword.shortDefinition}</span>
+                      <small>Googleで調べる ↗</small>
+                    </a>
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
 
-              {currentQuestion.sources.length > 0 && (
-                <div className="explanation-section source-section">
-                  <h3>出典</h3>
-                  <div className="source-list">
-                    {currentQuestion.sources.map((source) => (
-                      <a href={source.url} target="_blank" rel="noreferrer" key={`${source.name}-${source.url}`}>
-                        <strong>{source.name}</strong>{source.title ? `｜${source.title}` : ''} ↗
-                      </a>
-                    ))}
-                  </div>
+            {currentQuestion.sources.length > 0 && (
+              <div className="explanation-section source-section">
+                <h3>出典</h3>
+                <div className="source-list">
+                  {currentQuestion.sources.map((source) => (
+                    <a href={source.url} target="_blank" rel="noreferrer" key={`${source.name}-${source.url}`}>
+                      <strong>{source.name}</strong>{source.title ? `｜${source.title}` : ''} ↗
+                    </a>
+                  ))}
                 </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </section>
       )}
 
