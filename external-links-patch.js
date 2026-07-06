@@ -1,3 +1,5 @@
+import './quiz-flow-patch.js';
+
 function normalizeExternalUrl(value) {
   const raw = String(value || '').trim().replace(/\s/g, '');
   if (!raw) return null;
