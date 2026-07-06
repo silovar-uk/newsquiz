@@ -1,5 +1,5 @@
-const CACHE_NAME = 'news-context-quiz-v3-icon';
-const APP_SHELL = ['./', './index.html', './manifest.webmanifest', './app-icon.png'];
+const CACHE_NAME = 'news-context-quiz-v5-freshness';
+const APP_SHELL = ['./', './index.html', './manifest.webmanifest', './app-icon.png', './freshness-patch.js'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
