@@ -1,3 +1,4 @@
+import './set-cleanup-patch.js';
 import './quiz-flow-patch.js';
 
 function normalizeExternalUrl(value) {
