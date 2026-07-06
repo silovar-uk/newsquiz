@@ -1,3 +1,5 @@
+import './external-links-patch.js';
+
 const FRESHNESS_MARKER = '# ニュースの鮮度ルール（必須）';
 
 function quotaFor(total) {
@@ -40,6 +42,7 @@ function freshnessBlock(prompt) {
 - roundup を短期ニュース枠に数えるのは、3つの事実側が同じ鮮度帯に収まり、各選択肢に根拠を示せる場合だけにする。
 - 記事の更新日時だけが新しく、出来事そのものが7日より前なら短期ニュース枠に数えない。古い話題の再掲・まとめ・解説記事も同様。
 - 各短期ニュース問題は、sources に実在する一次情報または信頼できる報道機関のURLを付け、publishedAt には実際の公開日を記載する。
+- sources[].url は必ず https:// から始まる完全な外部URLにする。www.だけのURL、ドメインだけ、相対パスは使わない。
 - 確認できない速報、未確定の観測、出典不明のSNS投稿で枠を埋めない。確かな別ニュースに差し替える。
 
 `;
