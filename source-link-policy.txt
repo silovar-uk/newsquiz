@@ -1,0 +1,1 @@
+Source links in imported quiz JSON must be absolute external http(s) URLs. Use https://example.com/path, not www.example.com/path and not a relative path.
