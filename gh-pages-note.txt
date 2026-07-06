@@ -1,0 +1,1 @@
+GitHub Pages is published from the gh-pages branch root. This branch is replaced with static build output in the next commit.
