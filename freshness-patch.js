@@ -72,7 +72,8 @@ function updateFreshnessPreview() {
     const planPills = preview.querySelector('.plan-pills');
     planPills?.insertAdjacentElement('afterend', node);
   }
-  node.innerHTML = `<p class="section-kicker">NEWS FRESHNESS</p><ul class="mix-summary"><li>24時間以内 ${quota.within24}問以上（最優先）</li><li>24〜72時間 ${quota.within3d}問以上</li><li>4〜7日 ${quota.within7d}問以上</li></ul>`;
+  const markup = `<p class="section-kicker">NEWS FRESHNESS</p><ul class="mix-summary"><li>24時間以内 ${quota.within24}問以上（最優先）</li><li>24〜72時間 ${quota.within3d}問以上</li><li>4〜7日 ${quota.within7d}問以上</li></ul>`;
+  if (node.innerHTML !== markup) node.innerHTML = markup;
 }
 
 function applyFreshnessPatch() {
