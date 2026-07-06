@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { CategoryId, PromptSettings } from '../types';
 import { CATEGORY_META } from '../types';
-import { buildPrompt, getBalancedMixPreview, getDistribution } from '../lib/prompt';
+import { buildPrompt, getBalancedMixPreview, getDistribution, getNewsFreshnessPreview } from '../lib/prompt';
 
 interface PromptBuilderProps {
   settings: PromptSettings;
@@ -17,6 +17,7 @@ export function PromptBuilder({ settings, onSettingsChange }: PromptBuilderProps
   const prompt = useMemo(() => buildPrompt(settings), [settings]);
   const distribution = useMemo(() => getDistribution(settings), [settings]);
   const balancedMix = useMemo(() => getBalancedMixPreview(settings), [settings]);
+  const newsFreshness = useMemo(() => getNewsFreshnessPreview(settings), [settings]);
 
   const patch = (update: Partial<PromptSettings>) => onSettingsChange({ ...settings, ...update });
 
@@ -98,12 +99,18 @@ export function PromptBuilder({ settings, onSettingsChange }: PromptBuilderProps
             <span>つながる知識 {distribution.context}問</span>
             <span>まとめ読み {distribution.roundup}問</span>
           </div>
+          <div className="freshness-plan">
+            <p className="section-kicker">NEWS FRESHNESS</p>
+            <ul className="mix-summary">
+              {newsFreshness.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
           {settings.mode === 'balanced' && balancedMix.length > 0 && (
             <ul className="mix-summary">
               {balancedMix.map((item) => <li key={item}>{item}</li>)}
             </ul>
           )}
-          {settings.mode === 'theme' && settings.theme.trim() && <p className="theme-summary">「{settings.theme.trim()}」を中心に、派生問題は全体の約2割に抑えます。</p>}
+          {settings.mode === 'theme' && settings.theme.trim() && <p className="theme-summary">「{settings.theme.trim()}」を中心にしつつ、短期ニュースは24時間以内を最優先に必ず混ぜます。</p>}
         </div>
 
         <button className="advanced-toggle" onClick={() => setShowAdvanced((current) => !current)} aria-expanded={showAdvanced}>
