@@ -1,3 +1,4 @@
+import './flexible-import-patch.js';
 import './set-cleanup-patch.js';
 import './quiz-flow-patch.js';
 
