@@ -119,6 +119,15 @@ const normalizeChoices = (value: unknown): Choice[] => {
     }));
 };
 
+const shuffleChoices = (choices: Choice[]) => {
+  const shuffled = [...choices];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
+};
+
 export function validateQuizSet(raw: unknown): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -140,6 +149,7 @@ export function validateQuizSet(raw: unknown): ValidationResult {
   const categoryRemaps = new Map<string, { category: CategoryId; count: number }>();
   let typeRemapCount = 0;
   let markdownUrlCount = 0;
+  let shuffledChoiceCount = 0;
 
   questionsRaw.forEach((item, index) => {
     const number = index + 1;
@@ -154,12 +164,14 @@ export function validateQuizSet(raw: unknown): ValidationResult {
     const typeResult = normalizeType(item.type);
     const correctChoiceId = item.correctChoiceId;
     const choices = normalizeChoices(item.choices);
+    const shuffledChoices = choices.length === 4 ? shuffleChoices(choices) : choices;
     const sources = normalizeSources(item.sources);
     const learningFocus = item.learningFocus === 'context' || item.learningFocus === 'roundup'
       ? item.learningFocus
       : typeResult.type === 'false_news' ? 'roundup' : 'direct';
     const difficulty = item.difficulty === 2 || item.difficulty === 3 ? item.difficulty : 1;
 
+    if (choices.length === 4) shuffledChoiceCount += 1;
     if (categoryResult.remapped) {
       const key = categoryResult.raw || '未指定';
       const current = categoryRemaps.get(key) || { category: categoryResult.category, count: 0 };
@@ -196,7 +208,7 @@ export function validateQuizSet(raw: unknown): ValidationResult {
         difficulty,
         prompt,
         hint: isNonEmptyString(item.hint) ? item.hint : undefined,
-        choices,
+        choices: shuffledChoices,
         correctChoiceId,
         shortExplanation: isNonEmptyString(item.shortExplanation) ? item.shortExplanation : '解説は未入力です。',
         background: isNonEmptyString(item.background) ? item.background : undefined,
@@ -211,6 +223,7 @@ export function validateQuizSet(raw: unknown): ValidationResult {
   });
   if (typeRemapCount > 0) warnings.push(`問題形式 ${typeRemapCount}問をアプリ互換形式へ自動変換しました。`);
   if (markdownUrlCount > 0) warnings.push(`Markdown形式の出典URL ${markdownUrlCount}件を通常の外部URLへ自動変換しました。`);
+  if (shuffledChoiceCount > 0) warnings.push(`選択肢 ${shuffledChoiceCount}問をランダムに並べ替えました。正解位置の偏りを防ぐための自動処理です。`);
 
   if (errors.length > 0) return { valid: false, errors, warnings };
 
