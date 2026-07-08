@@ -1,3 +1,4 @@
+import './quiz-scroll-patch.js';
 import './source-layout-patch.js';
 import './flexible-import-patch.js';
 import './set-cleanup-patch.js';
