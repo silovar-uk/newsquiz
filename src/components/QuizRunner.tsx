@@ -21,11 +21,11 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
   const [activeMs, setActiveMs] = useState(initialAttempt.activeMs);
   const [showHint, setShowHint] = useState(Boolean(getAnswer(initialAttempt, quizSet.questions[initialAttempt.currentQuestionIndex]?.id ?? '')?.hintUsed));
   const lastTick = useRef(performance.now());
-  const answerPanelRef = useRef<HTMLElement>(null);
 
   const currentQuestion = quizSet.questions[attempt.currentQuestionIndex];
   const currentAnswer = currentQuestion ? getAnswer(attempt, currentQuestion.id) : undefined;
   const progress = quizSet.questions.length ? ((attempt.currentQuestionIndex + (currentAnswer ? 1 : 0)) / quizSet.questions.length) * 100 : 0;
+  const progressPercent = Math.round(progress);
 
   useEffect(() => {
     const handleVisibility = () => {
@@ -56,14 +56,6 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
   useEffect(() => {
     setShowHint(Boolean(getAnswer(attempt, quizSet.questions[attempt.currentQuestionIndex]?.id ?? '')?.hintUsed));
   }, [attempt.currentQuestionIndex, quizSet.id]);
-
-  useEffect(() => {
-    if (!currentAnswer) return;
-    const frame = window.requestAnimationFrame(() => {
-      answerPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, [currentAnswer?.selectedChoiceId, currentQuestion?.id]);
 
   const category = currentQuestion ? CATEGORY_META[currentQuestion.category] : undefined;
   const isLastQuestion = attempt.currentQuestionIndex === quizSet.questions.length - 1;
@@ -149,10 +141,17 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
 
   return (
     <main className="quiz-shell">
-      <header className="quiz-header">
-        <button className="text-button" onClick={onExit} aria-label="クイズを終了してホームへ戻る">終了</button>
-        <div className="quiz-timer" aria-label={`集中時間 ${formatDuration(activeMs)}`}>⏱ {formatDuration(activeMs)}</div>
-      </header>
+      <div className="quiz-sticky-status">
+        <header className="quiz-header">
+          <button className="text-button" onClick={onExit} aria-label="クイズを終了してホームへ戻る">終了</button>
+          <div className="quiz-timer" aria-label={`集中時間 ${formatDuration(activeMs)}`}>⏱ {formatDuration(activeMs)}</div>
+        </header>
+
+        <div className="quiz-progress-wrap" aria-label={`進捗 ${progressPercent}%`}>
+          <div className="quiz-progress-track"><div className="quiz-progress-bar" style={{ width: `${progress}%` }} /></div>
+          <div className="progress-caption">{progressPercent}%｜{attempt.currentQuestionIndex + 1}/{quizSet.questions.length}</div>
+        </div>
+      </div>
 
       {importNotice && (
         <div className="quiz-launch-notice" role="status">
@@ -160,11 +159,6 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
           <div><strong>取り込み完了</strong><small>{importNotice}</small></div>
         </div>
       )}
-
-      <div className="quiz-progress-wrap" aria-label={`進捗 ${Math.round(progress)}%`}>
-        <div className="quiz-progress-track"><div className="quiz-progress-bar" style={{ width: `${progress}%` }} /></div>
-        <div className="progress-caption">{attempt.currentQuestionIndex + 1} / {quizSet.questions.length}</div>
-      </div>
 
       <section className="question-card">
         <div className="question-topline">
@@ -214,7 +208,7 @@ export function QuizRunner({ quizSet, initialAttempt, onPersist, onComplete, onE
       </section>
 
       {currentAnswer && (
-        <section ref={answerPanelRef} className={`answer-panel ${currentAnswer.isCorrect ? 'answer-correct' : 'answer-wrong'}`} aria-live="polite">
+        <section className={`answer-panel ${currentAnswer.isCorrect ? 'answer-correct' : 'answer-wrong'}`} aria-live="polite">
           <div className="answer-status">
             <span className="answer-symbol">{currentAnswer.isCorrect ? '○' : '×'}</span>
             <div>
