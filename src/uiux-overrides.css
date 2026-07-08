@@ -12,6 +12,12 @@
 .danger-button:disabled { opacity: .55; cursor: wait; }
 .delete-set-error { display: block; margin-top: 9px; color: #ffb9b9; font-size: 12px; }
 
+/* 出典名・記事タイトル・URLが長くても、カード幅を突き破らないようにする。 */
+.source-section, .source-section .source-list { min-width: 0; max-width: 100%; }
+.source-section .source-list { display: grid; gap: 8px; }
+.source-section .source-list a { display: block; max-width: 100%; min-width: 0; padding: 10px 11px; border: 1px solid rgba(255,255,255,.1); border-radius: 11px; background: rgba(255,255,255,.035); color: #aebeed; text-decoration: none; font-size: 12px; line-height: 1.55; white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+.source-section .source-list a strong { overflow-wrap: anywhere; word-break: break-word; }
+
 /* 保存済みセットの削除を、アイコンだけでなく文字でも明示する。 */
 .set-card-actions .icon-button { width: auto; min-width: 104px; padding: 0 12px; font-size: 0; }
 .set-card-actions .icon-button::before { content: '⌫'; font-size: 16px; margin-right: 6px; }
