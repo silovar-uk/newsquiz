@@ -5,6 +5,13 @@
 .quiz-launch-notice small { color: #c5ebd0; font-size: 11px; line-height: 1.55; margin-top: 2px; }
 .answer-details.always-visible { margin-top: 20px; border-top: 1px solid rgba(255,255,255,.1); padding-top: 4px; }
 
+/* 回答後も勝手に解説へ飛ばさず、進捗と時間だけは常に見えるようにする。 */
+.quiz-sticky-status { position: sticky; top: 0; z-index: 18; margin: calc(-1 * max(16px, env(safe-area-inset-top))) -16px 14px; padding: max(12px, env(safe-area-inset-top)) 16px 10px; background: linear-gradient(180deg, rgba(15,17,23,.98), rgba(15,17,23,.9)); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(16px); }
+.quiz-sticky-status .quiz-header { min-height: 34px; }
+.quiz-sticky-status .quiz-progress-wrap { margin: 8px 0 0; }
+.quiz-sticky-status .progress-caption { min-width: 78px; color: #d8deed; font-weight: 800; }
+.quiz-sticky-status .quiz-timer { color: #f3f6ff; }
+
 .result-cleanup-card { margin-top: 20px; padding: 18px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; background: rgba(255,255,255,.035); }
 .result-cleanup-card h2 { margin: 4px 0 8px; font-size: 18px; }
 .result-cleanup-card p { margin: 0 0 14px; color: #b7bfce; font-size: 13px; line-height: 1.7; }
