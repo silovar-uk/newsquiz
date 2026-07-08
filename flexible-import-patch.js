@@ -55,11 +55,20 @@ function flexibleUrl(value) {
   return { value: unwrapped, changed: Boolean(markdown) };
 }
 
+function shuffleChoices(choices) {
+  const shuffled = [...choices];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
 function normalizeIncomingQuizJson(text) {
   const data = JSON.parse(text);
   if (!data || !Array.isArray(data.questions)) return { text, summary: null };
 
-  const changes = { schema: 0, category: 0, type: 0, url: 0 };
+  const changes = { schema: 0, category: 0, type: 0, url: 0, choices: 0 };
   if (Number(data.schemaVersion) !== 1) {
     data.schemaVersion = 1;
     changes.schema += 1;
@@ -75,6 +84,12 @@ function normalizeIncomingQuizJson(text) {
     if (type.changed) changes.type += 1;
     question.type = type.value;
     if (type.value === 'false_news' && question.learningFocus !== 'roundup') question.learningFocus = 'roundup';
+
+    if (Array.isArray(question.choices) && question.choices.length === 4 && question.__appChoicesShuffled !== true) {
+      question.choices = shuffleChoices(question.choices);
+      question.__appChoicesShuffled = true;
+      changes.choices += 1;
+    }
 
     if (Array.isArray(question.sources)) {
       question.sources.forEach((source) => {
@@ -93,6 +108,7 @@ function normalizeIncomingQuizJson(text) {
   if (changes.category) parts.push(`カテゴリ ${changes.category}問`);
   if (changes.type) parts.push(`問題形式 ${changes.type}問`);
   if (changes.url) parts.push(`出典URL ${changes.url}件`);
+  if (changes.choices) parts.push(`選択肢シャッフル ${changes.choices}問`);
   return { text: JSON.stringify(data, null, 2), summary: `アプリ側で互換化しました：${parts.join('／')}` };
 }
 
